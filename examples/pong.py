@@ -174,6 +174,7 @@ class Model(object):
 
         # declare function to train with mini-batch
         self.train = K.function([state, action, reward, next_state, terminal], loss, updates=updates)
+        self.predict = K.function([state], self.model(state))
 
     def copy_model_to_target(self):
         input = Input(shape=(84, 84, 4))
@@ -186,7 +187,7 @@ class Model(object):
         self.target = KerasModel(input, output)
 
     def choose_action(self, state):
-        return K.argmax(self.model(state))
+        return K.argmax(self.predict(state))
 
 
 def get_weights(layer):
@@ -254,7 +255,7 @@ if __name__ == '__main__':
 
     environment_id = 'Pong-v0'
     minibatch_size = 32
-    replay_memory_size = 1000000
+    replay_memory_size = 35
     agent_history_length = 4
     target_network_update_frequency = 10000
     discount_factor = 0.99
@@ -267,7 +268,7 @@ if __name__ == '__main__':
     initial_exploration = 1
     final_exploration = 0.1
     final_exploration_frame = 1000000
-    replay_start_size = 50000
+    replay_start_size = 50
     no_op_max = 30
 
     print 'starting replay memory ...'
