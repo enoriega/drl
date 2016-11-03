@@ -255,7 +255,7 @@ if __name__ == '__main__':
 
     environment_id = 'Pong-v0'
     minibatch_size = 32
-    replay_memory_size = 35
+    replay_memory_size = 1000000
     agent_history_length = 4
     target_network_update_frequency = 10000
     discount_factor = 0.99
@@ -268,7 +268,7 @@ if __name__ == '__main__':
     initial_exploration = 1
     final_exploration = 0.1
     final_exploration_frame = 1000000
-    replay_start_size = 50
+    replay_start_size = 50000
     no_op_max = 30
 
     print 'starting replay memory ...'
