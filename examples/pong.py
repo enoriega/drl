@@ -155,6 +155,7 @@ class Model(object):
         value = q_values[:, action]
 
         # get q-values for next state (after performing action in original state)
+        # NOTE do we need stop_gradient()?
         next_q_values = self.target(next_state)
 
         # max q-value for next state
