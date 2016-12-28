@@ -188,7 +188,8 @@ class Model(object):
         self.target = KerasModel(input, output)
 
     def choose_action(self, state):
-        return K.argmax(self.predict(state))
+        predicted = self.predict([np.reshape(state, (1,)+STATE_SHAPE)])
+        return K.argmax(predicted).eval()
 
 
 def get_weights(layer):
